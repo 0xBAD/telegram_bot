@@ -2,4 +2,4 @@
 simple telegram bot with WebHook
 
 
-Uses python3, Torando and MySQL as dbms
+Uses python3, Tornado and MySQL as dbms

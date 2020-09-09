@@ -1,5 +1,5 @@
-from lib.logger import log
 from lib.recordset import DB
+from classes.logger import log
 
 
 class User:
@@ -50,18 +50,16 @@ class DBStat(object):
                   "username= %s , " \
                   "language_code= %s "
 
-            if self.db.cursor.execute(sql, (user.user_id,user.first_name,user.last_name,user.username,user.language_code)):
+            if self.db.cursor.execute(sql, (
+            user.user_id, user.first_name, user.last_name, user.username, user.language_code)):
                 self.db.commit()
-
         except Exception as e:
-            import traceback
-            tb = traceback.format_exc()
-            log(tb)
+            log.error(e)
 
     def add_new_message(self, message=Message):
-        sql = '''insert into messages SET 
-                  text = %s, chat_id = %s, date = %s, from_id = %s
-                  '''
+        sql = """
+                insert into messages SET 
+                text = %s, chat_id = %s, date = %s, from_id = %s
+                  """
         if self.db.cursor.execute(sql, (message.text, message.chat_id, message.date, message.from_id)):
             self.db.commit()
-
